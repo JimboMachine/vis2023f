@@ -53,14 +53,14 @@
   {
       position:absolute;
       top:5%;
-      display:block; 
+      display:block;
       line-height:16px;
       width:45%;
       height:90%;
       background:#fff;
       box-sizing:border-box;
       text-align:center;
-      transition: all 0.3s ease-in 0s; 
+      transition: all 0.3s ease-in 0s;
       color:rgba(159,53,58,1);
       border:#888 1px solid;
       border-radius:3px;
@@ -101,11 +101,11 @@
 
   .twenty:hover {
       box-shadow: 0 0 5px 3px #f9eced;
-      color: cyan; 
+      color: cyan;
       text-shadow: 0 0 6px #FFFFFF, 0 0 6px #000000;
   }
 
-  .github-corner:hover 
+  .github-corner:hover
   .octo-arm {
     animation: octocat-wave 560ms ease-in-out
   }
@@ -121,12 +121,12 @@
     }
   }
   @media (max-width:500px) {
-    .github-corner:hover 
+    .github-corner:hover
     .octo-arm {
       animation:none
     }
 
-    .github-corner 
+    .github-corner
     .octo-arm {
       animation: octocat-wave 560ms ease-in-out
     }
@@ -135,9 +135,9 @@
   /* 波浪 */
   a {
     color:yellow;
-    text-decoration: none; 
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 4'%3E%3Cpath fill='none' stroke='%23fff' d='M0 3.5c5 0 5-3 10-3s5 3 10 3 5-3 10-3 5 3 10 3'/%3E%3C/svg%3E") repeat-x 0 100%; 
-    background-size:20px auto; 
+    text-decoration: none;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 4'%3E%3Cpath fill='none' stroke='%23fff' d='M0 3.5c5 0 5-3 10-3s5 3 10 3 5-3 10-3 5 3 10 3'/%3E%3C/svg%3E") repeat-x 0 100%;
+    background-size:20px auto;
     animation: waveMove 1s infinite linear;
   }
 
@@ -185,7 +185,9 @@
   <!-- ------------------------------------------------>
   <div class="row hw12">
     <div class="col-md-12 twenty">
-      心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。
+      心得報告 105 字:
+      有關這次功課一老師帶我們透過部分寫好的範例程式帶我們了解D3跟網頁是如何開發的，並讓我們把部分資料變得更清晰或是說更具體給讀者看，
+      使得資料在讀者面前變得更有意義，又更加美觀。目前還算是簡單的，希望後面作業我也能像作業一一樣。
     </div>
   </div>
 
@@ -201,20 +203,29 @@
         </tr>
         <tr>
           <td rowspan="7" id="myTotal"></td>
-          <td><input type="checkbox" class="flipswitch" id="myCheckbox1"></td>
+          <td><input type="checkbox" class="flipswitch" id="myCheckbox1" checked></td>
           <td id='m1'>2</td>
           <td>Simple baseline - 描述、描述、描述</td>
         </tr>
+        <button type="button" onclick="location.href='src-easy/index.html'">
+            easy
+        </button>
         <tr>
-          <td><input type="checkbox" class="flipswitch" id="myCheckbox2" checked></td>
+          <td><input type="checkbox" class="flipswitch" id="myCheckbox2"></td>
           <td id='m2'>6</td>
           <td>Medium baseline - 描述、描述、描述 </td>
         </tr>
+        <button type="button" onclick="location.href='src-easy/index.html'">
+            Medium
+        </button>
         <tr>
           <td><input type="checkbox" class="flipswitch" id="myCheckbox3"></td>
           <td id='m3'>2</td>
           <td>Strong baseline - 描述、描述、描述 </td>
         </tr>
+        <button type="button" onclick="location.href='src-easy/index.html'">
+            Strong
+        </button>
       </table>
     </div>
   </div>
@@ -250,7 +261,7 @@
   d3.select("#myCheckbox7").on("change",update);
 
   update();
-  
+
   function update(){
 
     var score = 0;
@@ -260,14 +271,14 @@
     }
 
     if (d3.select("#myCheckbox2").property("checked")){
-      score += parseInt(d3.select('#m2').html());   
+      score += parseInt(d3.select('#m2').html());
     }
 
     if (d3.select("#myCheckbox3").property("checked")){
-      score += parseInt(d3.select('#m3').html());   
+      score += parseInt(d3.select('#m3').html());
     }
 
-    d3.select("#myTotal").html(score);    
+    d3.select("#myTotal").html(score);
   }
 </script>
 
