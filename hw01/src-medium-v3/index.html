@@ -85,23 +85,23 @@ https://www.oxxostudio.tw/articles/201501/svg-d3-13-csv.html
             box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
         }
 
-        /*
+        
         .excellent-kid {
             background-color: skyblue;
         }
 
         .good-kid {
-            background-color: pink;
+            background-color: rgb(60, 161, 51);
         }
 
         .fair-kid {
-            background-color: pink;
+            background-color: rgb(115, 129, 25);
         }
 
         .poor-kid {
             background-color: pink;
         }
-        */
+        
 
         td:hover img {
             transition: width, height;
@@ -215,10 +215,7 @@ https://www.oxxostudio.tw/articles/201501/svg-d3-13-csv.html
             .data(function (d) { return d; }).enter()
             .append("td")
             .html(function (d, i) {
-                if ( i == 4 && d != 'GitHub 帳號' ) {
-                    return '<a href="https://' + d + '.github.io/vis2023f/" target="_blank"><img src="https://' + d + '.github.io/vis2023f/hw00/me.jpg"></a>' + '<hr><a href="https://github.com/' + d + '/vis2023f/" target="_blank">' + d + '</a>';
-                }
-                else if ( i == 0 || i == 2 || isNaN(d)) {
+            if ( i == 0 || i == 2 || isNaN(d)) {
                     return d;
                 }
             })
