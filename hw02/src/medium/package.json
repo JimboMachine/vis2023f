@@ -1,0 +1,14 @@
+{
+  "name": "9d7a3a0b89e4b3d7",
+  "main": "9d7a3a0b89e4b3d7@18.js",
+  "version": "18.0.0",
+  "homepage": "https://observablehq.com/d/9d7a3a0b89e4b3d7",
+  "author": {
+    "name": "Jimbo's Workspace",
+    "url": "https://observablehq.com/@jimbo2-ws"
+  },
+  "type": "module",
+  "peerDependencies": {
+    "@observablehq/runtime": "4 - 5"
+  }
+}

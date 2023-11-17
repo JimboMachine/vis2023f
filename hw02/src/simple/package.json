@@ -1,0 +1,14 @@
+{
+  "name": "759f2ab73caff8e6",
+  "main": "759f2ab73caff8e6@23.js",
+  "version": "23.0.0",
+  "homepage": "https://observablehq.com/d/759f2ab73caff8e6",
+  "author": {
+    "name": "Jimbo's Workspace",
+    "url": "https://observablehq.com/@jimbo2-ws"
+  },
+  "type": "module",
+  "peerDependencies": {
+    "@observablehq/runtime": "4 - 5"
+  }
+}
