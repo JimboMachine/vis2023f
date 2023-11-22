@@ -1,4 +1,3 @@
-
 <!--
 http://bl.ocks.org/ndarville/7075823
 https://www.oxxostudio.tw/articles/201501/svg-d3-13-csv.html
@@ -10,33 +9,34 @@ https://www.oxxostudio.tw/articles/201501/svg-d3-13-csv.html
 
 <head>
     <meta charset="utf-8">
-    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <link rel="icon" href="../../hw00/favicon.svg"/>
+    <link rel="stylesheet" href="path/to/your/style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <style>
         /* @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@900&display=swap'); */
-
-        @font-face {
-            font-family:'CircleFont'; /* src: url(https://circle472.github.io/ct2022s/hw04/CircleFont.ttf);  https://github.com/circle472/ct2022s/ */
-            src: url(CircleFont_v2.woff2); /* https://cloudconvert.com/ttf-to-woff2 */
-        }
+        
+  
+        /* @font-face {
+            font-family:'CircleFont';
+            src: url(../data/font/CircleFont_v2.woff2);
+        } */
 
         h3 {
-            background-color: rgba(255, 255, 0, 0.1);
-            color: white;
+            color: white; 
             text-shadow: 0 0 6px #FF0000, 0 0 6px #000000;
             font-family: 'CircleFont', 'Noto Serif JP', serif;
             font-size: 18pt;
-            border: solid 1px black;
             width: 90%;
             margin: 5px auto;
             padding: 10px;
             text-align: center;
         }
 
-        div {
-            background-color: rgba(255, 255, 0, 0.1);
-            font-family: 'CircleFont', 'Noto Serif JP', serif;
-            font-size: 16pt;
-            border: solid 1px black;
+        .rect-text {
+            fill: white;
+            text-shadow: 0 0 1px #000000, 0 0 3px #000000;
+            font-family: 'Noto Serif JP', serif;
+            font-size: 8pt;
             width: 90%;
             margin: 5px auto;
             padding: 10px;
@@ -44,7 +44,7 @@ https://www.oxxostudio.tw/articles/201501/svg-d3-13-csv.html
         }
 
         body {
-            background-color: rgba(255, 128, 255, 0.1);
+            background-color: rgba(175, 209, 228, 0.19);
             font-family: 'CircleFont', 'Noto Serif JP', serif;
         }
 
@@ -65,6 +65,10 @@ https://www.oxxostudio.tw/articles/201501/svg-d3-13-csv.html
             border: 1px black solid;
             padding: 5px;
             background-color: rgba(128, 255, 255, 0.1);
+        }
+
+        .clear-font {
+            font-family: 'Noto Serif JP', serif;
         }
 
         td.left {
@@ -153,113 +157,14 @@ https://www.oxxostudio.tw/articles/201501/svg-d3-13-csv.html
 </head>
 
 <body>
-    <h3>Data Visualization 成績</h3>
-
+    <!-- 
+        <h3>Data Visualization 成績 (Using d3 v7)</h3> 
+    ------------------------------------>
     <div id="div1"></div>
+    
+    <div id="div2"><hr></div>
 
-    <div id="div2"></div>
-
-    <script type="text/javascript" charset="utf-8">
-
-        d3.select("#div1")
-            .append("table")
-            .append("tr")
-            .selectAll("td")
-            .data([10,9,8,7,6,5,4,3,2,1,0])
-            .enter()
-            .append("td")
-            .text(function (d, i) {
-                if (i <= 10 || isNaN(d)) {
-                    return d;
-                }
-            })
-            // img
-            .attr("class", function (d, i) {
-                if (d == 10) return "excellent-kid";
-                else if (d >= 7 ) return "good-kid";
-                else if (d >= 2 ) return "fair-kid";
-                else return "poor-kid";})
-            .append("img")
-            .attr("src", function (d, i) {
-                if (d == 10) return "./images/52.svg";
-                else if (d == 9) return "./images/51.svg";
-                else if (d == 8) return "./images/42.svg";
-                else if (d == 7) return "./images/41.svg";
-                else if (d == 6) return "./images/32.svg";
-                else if (d == 5) return "./images/31.svg";
-                else if (d == 4) return "./images/22.svg";
-                else if (d == 3) return "./images/21.svg";
-                else if (d == 2) return "./images/12.svg";
-                else if (d == 1) return "./images/11.svg";
-                else if (d == 0) return "./images/01.svg";
-                else return "./images/00.svg"; })
-            .attr("x", "0")
-            .attr("y", "0")
-            .attr("width",  function(d, i) { return (i + 1) * 60; })
-            .attr("height", function(d, i) { return (i + 1) * 60; });
-
-
-    d3.text("./csv/data.csv", function (data) {
-
-        //var parsedCSV = d3.csv.parseRows(data);
-        parsedCSV = d3.csv.parseRows(data);
-        //console.log(parsedCSV);
-
-        var container = d3.select("#div2")
-            .append("table")
-            .selectAll("tr")
-            .data(parsedCSV)
-            .enter()
-            .append("tr")
-            .selectAll("td")
-            .data(function (d) { return d; }).enter()
-            .append("td")
-            .html(function (d, i) {
-                if ( i == 4 && d != 'GitHub 帳號' ) {
-                    return '<a href="https://' + d + '.github.io/vis2023f/" target="_blank"><img src="https://' + d + '.github.io/vis2023f/hw00/me.jpg"></a>' + '<hr><a href="https://github.com/' + d + '/vis2023f/" target="_blank">' + d + '</a>';
-                }
-                else if ( i == 0 || i == 2 || isNaN(d)) {
-                    return d;
-                }
-            })
-            .filter(function (d, i) { return (i > 2 && !isNaN(d) && d != ""); })
-            .attr("class", function (d, i) {
-                if (d == 10) return "excellent-kid";
-                else if (d >= 7 ) return "good-kid";
-                else if (d >= 2 ) return "fair-kid";
-                else return "poor-kid";})
-            .append("img")
-            .attr("src", function (d, i) {
-                if (d == 10)
-                    return "./images/52.svg";
-                else if (d == 9)
-                    return "./images/51.svg";
-                else if (d == 8)
-                    return "./images/42.svg";
-                else if (d == 7)
-                    return "./images/41.svg";
-                else if (d == 6)
-                    return "./images/32.svg";
-                else if (d == 5)
-                    return "./images/31.svg";
-                else if (d == 4)
-                    return "./images/22.svg";
-                else if (d == 3)
-                    return "./images/21.svg";
-                else if (d == 2)
-                    return "./images/12.svg";
-                else if (d == 1)
-                    return "./images/11.svg";
-                else if (d == 0)
-                    return "./images/01.svg";
-                else
-                    return "./images/00.svg";
-            })
-            .attr("width", 50)
-            .attr("height", 50)
-            ;
-    });
-    </script>
+    <script src="./script.js"></script>
 </body>
 
 </html>
