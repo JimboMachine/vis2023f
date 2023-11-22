@@ -2,6 +2,7 @@
 // https://observablehq.com/@shaunkallis/stacked-horizontal-bar-chart-of-cumulative-homework-score
 let parsed_csv;
 let student_info = [];
+let student_total_grade = Array(120).fill(0);
 let series;
 let color_dict;
 let labelSpan = [10, 45, 100, 150, 210];
@@ -18,7 +19,7 @@ d3.text("./csv/data.csv").then(function (data) {
             d.姓名,
             d['GitHub']
         ]);
-        console.log(d['GitHub']); // 添加這行
+        //console.log(d['GitHub']); // 添加這行
         return d;
     });
 
@@ -148,6 +149,9 @@ function CreateScoreSVG() {
         .attr("font-size", 12)
         .text(function(d) {
             score = d[1] - d[0];
+            student_total_grade[parseInt(d.data.序號, 10)] += score;
+            //console.log(typeof d.data.序號)
+            //console.log(`序號: ${d.data.序號}, 成績: ${student_total_grade[d.data.序號]}`)
             if (score != 0) {
                 return score;
             }
@@ -162,29 +166,61 @@ function CreateScoreSVG() {
         .node()
         .appendChild(score_svg.node());
     
-    d3.select("#div2")
-        .select("svg")
-        .append("g")
-        .attr("transform", "translate(0,0)")
-        .call(d3.axisRight(y).tickFormat(""))
-        .call(g => g.select(".domain").remove())
-        .call(g => g.selectAll("g").select("line").remove())
-        .selectAll("g")
-        .data(student_info)
-        .selectAll("text")
-        .data(d => [d])
-        .attr("font-size", "8pt")
-        .selectAll("tspan")
-        .data(d => d)
-        .enter()
-        .append("tspan")
-        .attr("x", (d, i) => labelSpan[i])
-        .attr("text-anchor", "middle")
-        .html((d, i) =>{
-            if (i == 4) {
-                return '<a xlink:href="https://github.com/' + d + '/vis2023f/" target="_blank" style="fill: blue; text-decoration: underline;">' + d + '</a>';
-            } else {
-                return d;
-            }
-        });
+    function getColor(score) {
+        // 根據成績區間返回對應的顏色
+        if(score >= 95){
+            return "#ffa500";  // 95以上 orange
+        }
+        else if(score >= 90){
+            return "#ff0000";  // 90以上 red
+        }
+        else if (score >= 85) {
+            return "#800080";  // 85以上 purple
+        } else if (score >= 75) {
+            return "#0000cd";    // 75以上 lightblue
+        } else if (score >= 65) {
+            return "#add8e6";   // 65以上 lightblue 
+        } else if (score >= 60) {
+            return "#ffd700";    // 60以上 gold
+        } else if (score >= 40) {
+            return "#c0c0c0";  // 40以上 silver
+        } else if (score >= 20) {
+            return "#cd7f32";  // 20以上 brown
+        } else {
+            return "#5a5a5a";    // 0~19 gray
+        }
+    }
+    
+let color;
+
+d3.select("#div2")
+    .select("svg")
+    .append("g")
+    .attr("transform", "translate(0,0)")
+    .call(d3.axisRight(y).tickFormat(""))
+    .call(g => g.select(".domain").remove())
+    .call(g => g.selectAll("g").select("line").remove())
+    .selectAll("g")
+    .data(student_info)
+    .selectAll("text")
+    .data(d => [d])
+    .attr("font-size", "8pt")
+    .selectAll("tspan")
+    .data(d => d)
+    .enter()
+    .append("tspan")
+    .attr("x", (d, i) => labelSpan[i])
+    .attr("text-anchor", "middle")
+    .html((d, i) => {
+        if(i == 0){
+            color = getColor(student_total_grade[d]) 
+        }
+        if (i === 4) {
+            console.log(color);
+            return '<a xlink:href="https://github.com/' + d + '/vis2023f/" target="_blank" style="fill: ' + color + '; text-decoration: underline;">' + d + '</a>';
+        } else {
+            return d;
+        }
+    });
+
 }
