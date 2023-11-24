@@ -1,0 +1,14 @@
+{
+  "name": "d40390ce195ff64d",
+  "main": "d40390ce195ff64d@70.js",
+  "version": "70.0.0",
+  "homepage": "https://observablehq.com/d/d40390ce195ff64d",
+  "author": {
+    "name": "Jimbo's Workspace",
+    "url": "https://observablehq.com/@jimbo2-ws"
+  },
+  "type": "module",
+  "peerDependencies": {
+    "@observablehq/runtime": "4 - 5"
+  }
+}
